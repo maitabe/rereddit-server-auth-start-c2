@@ -4,7 +4,7 @@ app.factory('posts', ['$http', function($http) {
 
     getAll: function() {
       return $http.get('/posts').then(function(data) {
-  
+
         angular.copy(data.data, postService.posts);
       });
     },
@@ -23,6 +23,14 @@ app.factory('posts', ['$http', function($http) {
 
     upvote: function(post) {
       // TODO: Finish
+      return $http.put('/posts/'+ post._id + '/upvote', post).then(function(res) {
+
+            console.log('updateSucceed =', res.data);
+
+            if(!res.data){
+                console.error('upvote didnt succeed!' );
+            }
+        });
     },
 
     addComment: function(id, comment) {
@@ -31,9 +39,11 @@ app.factory('posts', ['$http', function($http) {
 
     upvoteComment: function(post, comment) {
       // TODO: Finish
+      return $http.put('/posts/' + post._id +'/comments/' + comment._id + '/upvote');
+
     }
   };
-  
+
 
   return postService;
 }]);
