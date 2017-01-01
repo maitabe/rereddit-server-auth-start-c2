@@ -11,5 +11,4 @@ app.controller('AuthCtrl', ['$scope','auth', function($scope, auth){
   };
 
 
-
 }]);

@@ -7,6 +7,8 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
 
    auth.register = function (user){
    	return $http.post('/register', user).then(function(data) {
+   		console.log('back');
+   		console.log(data);
    		auth.saveToken(data.data.token);
    	});
    };

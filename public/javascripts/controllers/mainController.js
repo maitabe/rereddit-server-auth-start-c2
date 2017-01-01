@@ -17,3 +17,6 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
     posts.upvote(item);
   };
 }]);
+
+// to see the user in the console log you use
+//atob('token') part of the token
