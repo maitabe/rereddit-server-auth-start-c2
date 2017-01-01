@@ -8,7 +8,7 @@ require('../config/passport');
 var Post = require('../models/Posts');
 var Comment = require('../models/Comments');
 var User = require('../models/Users');
-console.log('im in the server')
+console.log('im in the server');
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});

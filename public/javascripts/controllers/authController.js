@@ -12,5 +12,4 @@ app.controller('AuthCtrl', ['$scope','auth','$state', function($scope, auth, $st
 
   };
 
-
 }]);

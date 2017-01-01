@@ -15,6 +15,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
      });
    };
 
+   //check state of user
    auth.isLoggedIn = function(){
      var token = auth.getToken();
 
@@ -36,6 +37,13 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
    auth.logOut = function(){
      $window.localStorage.removeItem('rereddit-jwt');
+   };
+
+   auth.loginUser = function(user) {
+   		return $http.post('/login', user);
+   		// .then(function(data){
+   		// 	// auth.saveToken(data.token);
+   		// });
    };
 
   return auth;
