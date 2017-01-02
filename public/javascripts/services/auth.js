@@ -2,6 +2,8 @@ app.factory('auth', ['$http', '$window', function($http, $window){
    var auth = {};
 
    auth.saveToken = function (token) {
+   	console.log('just got to save Token funct');
+   	console.log(token);
      $window.localStorage['rereddit-jwt'] = token;
    };
 
@@ -11,7 +13,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
    auth.register = function (user) {
      return $http.post('/register', user).success(function(data){
-       auth.saveToken(data.token);
+       auth.saveToken(data.data.token);
      });
    };
 
@@ -27,6 +29,8 @@ app.factory('auth', ['$http', '$window', function($http, $window){
    };
 
    auth.currentUser = function(){
+   	console.log('who calls me?');
+   	console.log(this);
      if(auth.isLoggedIn()){
        var token = auth.getToken();
        var decodedToken = JSON.parse($window.atob(token.split('.')[1]));
@@ -37,14 +41,17 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
    auth.logOut = function(){
      $window.localStorage.removeItem('rereddit-jwt');
+
    };
 
    auth.loginUser = function(user) {
-   		return $http.post('/login', user);
-   		// .then(function(data){
-   		// 	// auth.saveToken(data.token);
-   		// });
+   		return $http.post('/login', user).then(function(data){
+   			console.log(data.data.token);
+   			auth.saveToken(data.data.token);
+   		});
    };
 
   return auth;
 }]);
+
+

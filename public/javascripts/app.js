@@ -33,6 +33,7 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       controller:'LoginCtrl'
     });
 
+
   $urlRouterProvider.otherwise('home');
 
 }]);

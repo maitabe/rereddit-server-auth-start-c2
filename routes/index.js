@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var passport = require('passport');
+var expressJWT = require('express-jwt');
+
+var auth = expressJWT({secret: 'myLittleSecret'});
 
 require('../config/passport');
 
@@ -9,6 +12,7 @@ var Post = require('../models/Posts');
 var Comment = require('../models/Comments');
 var User = require('../models/Users');
 console.log('im in the server');
+
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
@@ -45,7 +49,7 @@ router.post('/login', function(req, res, next){
 });
 
 //get all post from db
-router.get('/posts', function(req, res, next) {
+router.get('/posts', auth, function(req, res, next) {
   Post.find(function(err, posts){
     if(err){ return next(err); }
 

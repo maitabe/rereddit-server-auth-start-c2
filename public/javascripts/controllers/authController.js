@@ -3,7 +3,9 @@ app.controller('AuthCtrl', ['$scope','auth','$state', function($scope, auth, $st
 
   $scope.register = function () {
   		//grab the user from the register form
+
   	 auth.register($scope.user).then(function(){
+
   	 	$state.go('home');
   	 });
 
